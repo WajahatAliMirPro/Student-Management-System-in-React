@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
 /* --------------------------------------------------
-   BASE – Clean & Professional
+   BASE – Futuristic, Premium Glassmorphism
 -------------------------------------------------- */
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
+    background: linear-gradient(135deg, #16203a 40%, #31c3c4 100%);
   }
 
   body {
-    @apply bg-white text-gray-900;
+    @apply text-gray-100 bg-gradient-to-br from-[#1a223f] to-[#22243a] min-h-screen antialiased;
+    backdrop-filter: blur(5px);
   }
 
   * {
@@ -25,72 +27,184 @@
 }
 
 /* --------------------------------------------------
-   COMPONENTS – Clean, Stylish, Readable
+   COMPONENTS – Futuristic, Animated, Glassy
 -------------------------------------------------- */
 @layer components {
 
-  /* Primary Button */
+  /* --------------------------------------------------
+     Buttons – Neon, Elevated, Interactive
+  -------------------------------------------------- */
+
   .btn-primary {
-    @apply px-4 py-2 rounded-lg font-medium text-white bg-blue-600 hover:bg-blue-700 shadow-sm hover:shadow-lg transition-all duration-300 active:scale-95;
+    @apply px-5 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-[#4461f2] via-[#14aff0] to-[#31c3c4] text-white shadow-lg transition-all duration-300 active:scale-95 relative overflow-hidden;
+    box-shadow: 0 2px 24px 0 #14aff055;
+    border: none;
   }
 
-  /* Secondary Button */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    background: radial-gradient(circle, #5bf6e8 15%, transparent 80%);
+    transition: opacity 0.35s;
+  }
+
+  .btn-primary:hover::after {
+    opacity: 0.18;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(90deg, #5379fb 30%, #31c3c4 90%);
+    box-shadow: 0 4px 36px 0 #31c3c488;
+  }
+
   .btn-secondary {
-    @apply px-4 py-2 rounded-lg font-medium bg-gray-100 text-gray-800 border border-gray-300 hover:bg-gray-200 transition-all duration-300 active:scale-95;
+    @apply px-5 py-2.5 rounded-xl font-semibold bg-gradient-to-r from-[#202735] to-[#383e56] text-[#31c3c4] border-2 border-[#31c3c4cc] shadow-md transition-all duration-300 active:scale-95;
+    backdrop-filter: blur(2px) brightness(1.04);
   }
 
-  /* Danger Button */
+  .btn-secondary:hover {
+    background: linear-gradient(90deg, #232c43, #31c3c418 95%);
+    box-shadow: 0 4px 32px 0 #14aff055;
+    color: #5bf6e8;
+    border-color: #5bf6e8cc;
+  }
+
   .btn-danger {
-    @apply px-4 py-2 rounded-lg font-medium text-white bg-red-600 hover:bg-red-700 shadow-sm hover:shadow-lg transition-all duration-300 active:scale-95;
+    @apply px-5 py-2.5 rounded-xl font-semibold text-white bg-gradient-to-r from-[#ef477b] to-[#f9803a] shadow-lg transition-all duration-300 active:scale-95 border-none;
+    box-shadow: 0 2px 24px 0 #ef477b44;
   }
 
-  /* Input Fields */
+  .btn-danger:hover {
+    background: linear-gradient(90deg, #fd5e8e 40%, #f98f61 90%);
+    box-shadow: 0 6px 40px 0 #ef477b77;
+  }
+
+  /* --------------------------------------------------
+     Inputs – Glassy, Glowing Focus
+  -------------------------------------------------- */
+
   .input-field {
-    @apply w-full px-4 py-2 rounded-lg border border-gray-300 bg-white text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 outline-none;
+    @apply w-full px-4 py-2 rounded-xl border border-[#2da1ff55] bg-[#232a44cc] text-white focus:ring-2 focus:ring-[#31c3c4] focus:border-[#31c3c4] transition-all duration-200 shadow-md;
+    backdrop-filter: blur(5px);
   }
 
-  /* Cards – smooth, premium, modern */
+  .input-field:focus {
+    box-shadow: 0 0 12px 0 #31c3c4aa;
+  }
+
+  /* --------------------------------------------------
+     Cards – Glassmorphism Soft UI
+  -------------------------------------------------- */
+
   .card {
-    @apply bg-white text-gray-900 rounded-xl border border-gray-200 p-6 shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply bg-gradient-to-br from-[#262f4b99] to-[#22243acc] text-gray-100 rounded-2xl border border-[#31c3c466] p-8 shadow-xl hover:shadow-2xl transition-all duration-400 hover:-translate-y-1 relative overflow-hidden;
+    backdrop-filter: blur(8px) brightness(1.08);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: -15%;
+    width: 140%;
+    height: 60%;
+    background: radial-gradient(circle, #31c3c480 15%, transparent 70%);
+    opacity: 0.07;
+    pointer-events: none;
   }
 
   .card-shadow {
-    @apply shadow-md hover:shadow-xl transition-all duration-300;
+    @apply shadow-2xl hover:shadow-[0_8px_40px_0_#31c3c488] transition-all duration-400;
   }
 
-  /* Fade-in Animation */
+  /* --------------------------------------------------
+     Animations – Futuristic, Glowy Micro-interactions
+  -------------------------------------------------- */
+
+  /* Neon fade-in */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
+    animation: neonFadeIn 0.7s cubic-bezier(0.77, 0, 0.175, 1) forwards;
   }
 
-  /* Soft floating animation */
+  /* Soft floating effect (futuristic waves) */
   .animate-float {
-    animation: floatUpDown 3s ease-in-out infinite;
+    animation: floatWave 2.7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Slide-in Up and Glow */
+  .animate-slide-up {
+    animation: slideUpGlow 0.55s cubic-bezier(0.77, 0, 0.175, 1) forwards;
   }
 
-  @keyframes floatUpDown {
+  /* Glassy pulse */
+  .animate-glass-pulse {
+    animation: glassPulse 1.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* KEYFRAMES */
+
+  @keyframes neonFadeIn {
     0% {
+      opacity: 0;
+      filter: blur(8px);
+      transform: scale(0.98) translateY(16px);
+    }
+
+    85% {
+      opacity: 1;
+      filter: blur(0.5px);
+      transform: scale(1.02);
+    }
+
+    100% {
+      opacity: 1;
+      filter: blur(0);
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes floatWave {
+
+    0%,
+    100% {
       transform: translateY(0);
     }
 
     50% {
-      transform: translateY(-6px);
+      transform: translateY(-8px) scale(1.01);
+    }
+  }
+
+  @keyframes slideUpGlow {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.97);
+    }
+
+    70% {
+      opacity: 1;
+      box-shadow: 0 0 18px #31c3c455;
     }
 
     100% {
-      transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      box-shadow: none;
+    }
+  }
+
+  @keyframes glassPulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 18px #31c3c433;
+    }
+
+    60% {
+      box-shadow: 0 0 36px #5bf6e8aa;
     }
   }
 }

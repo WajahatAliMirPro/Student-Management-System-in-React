@@ -4,9 +4,11 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
-import EmployeeList from './pages/EmployeeList';
-import AddEmployee from './pages/AddEmployee';
-import EditEmployee from './pages/EditEmployee';
+import StudentList from './pages/StudentList';
+import AddStudent from './pages/AddStudent';
+import EditStudent from './pages/EditStudent';
+import Attendance from './pages/Attendance';
+import AttendanceReport from './pages/AttendanceReport';
 import './App.css';
 
 const ProtectedRoute = ({ children }) => {
@@ -37,26 +39,42 @@ const App = () => {
             }
           />
           <Route
-            path="/employees"
+            path="/students"
             element={
               <ProtectedRoute>
-                <EmployeeList />
+                <StudentList />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/add-employee"
+            path="/add-student"
             element={
               <ProtectedRoute>
-                <AddEmployee />
+                <AddStudent />
               </ProtectedRoute>
             }
           />
           <Route
-            path="/edit-employee/:id"
+            path="/edit-student/:id"
             element={
               <ProtectedRoute>
-                <EditEmployee />
+                <EditStudent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/attendance"
+            element={
+              <ProtectedRoute>
+                <Attendance />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/attendance-report"
+            element={
+              <ProtectedRoute>
+                <AttendanceReport />
               </ProtectedRoute>
             }
           />

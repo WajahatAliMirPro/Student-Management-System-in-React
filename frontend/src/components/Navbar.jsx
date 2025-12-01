@@ -24,7 +24,7 @@ const Navbar = () => {
                     <div className="flex items-center">
                         <Link to="/" className="flex-shrink-0">
                             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-primary-200">
-                                EMS
+                                Student Management System
                             </span>
                         </Link>
                         <div className="hidden md:block">
@@ -36,10 +36,22 @@ const Navbar = () => {
                                     Dashboard
                                 </Link>
                                 <Link
-                                    to="/employees"
-                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/employees')}`}
+                                    to="/students"
+                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/students')}`}
                                 >
-                                    Employee List
+                                    Student List
+                                </Link>
+                                <Link
+                                    to="/attendance"
+                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/attendance')}`}
+                                >
+                                    Attendance
+                                </Link>
+                                <Link
+                                    to="/attendance-report"
+                                    className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${isActive('/attendance-report')}`}
+                                >
+                                    Report
                                 </Link>
                             </div>
                         </div>
@@ -92,11 +104,25 @@ const Navbar = () => {
                             Dashboard
                         </Link>
                         <Link
-                            to="/employees"
-                            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/employees')}`}
+                            to="/students"
+                            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/students')}`}
                             onClick={() => setIsMenuOpen(false)}
                         >
-                            Employee List
+                            Student List
+                        </Link>
+                        <Link
+                            to="/attendance"
+                            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/attendance')}`}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Attendance
+                        </Link>
+                        <Link
+                            to="/attendance-report"
+                            className={`block px-3 py-2 rounded-md text-base font-medium ${isActive('/attendance-report')}`}
+                            onClick={() => setIsMenuOpen(false)}
+                        >
+                            Report
                         </Link>
                     </div>
                     <div className="pt-4 pb-4 border-t border-primary-700">

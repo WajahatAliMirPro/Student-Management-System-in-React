@@ -1,20 +1,34 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import api from '../utils/api';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const AddEmployee = () => {
+const EditStudent = () => {
+    const { id } = useParams();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         mobile: '',
-        designation: 'HR',
-        gender: 'Male',
-        course: 'MCA',
+        department: '',
+        gender: '',
+        course: '',
         image: '',
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchStudent = async () => {
+            try {
+                const { data } = await api.get(`/students/${id}`);
+                setFormData(data);
+            } catch (error) {
+                console.error('Error fetching student:', error);
+                alert('Error fetching student details');
+            }
+        };
+        fetchStudent();
+    }, [id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,11 +38,11 @@ const AddEmployee = () => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await api.post('/employees', formData);
-            navigate('/employees');
+            await api.put(`/students/${id}`, formData);
+            navigate('/students');
         } catch (error) {
-            console.error('Error adding employee:', error);
-            alert(error.response?.data?.message || 'Error adding employee');
+            console.error('Error updating student:', error);
+            alert(error.response?.data?.message || 'Error updating student');
         } finally {
             setIsLoading(false);
         }
@@ -40,8 +54,8 @@ const AddEmployee = () => {
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 animate-fade-in">
                 <div className="card overflow-hidden">
                     <div className="px-6 py-4 bg-primary-50 border-b border-primary-100">
-                        <h2 className="text-xl font-bold text-primary-900">Create New Employee</h2>
-                        <p className="text-sm text-primary-600 mt-1">Fill in the details to add a new employee to the system.</p>
+                        <h2 className="text-xl font-bold text-primary-900">Edit Student</h2>
+                        <p className="text-sm text-primary-600 mt-1">Update the details of the student.</p>
                     </div>
                     <form onSubmit={handleSubmit} className="p-6 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -54,7 +68,6 @@ const AddEmployee = () => {
                                     value={formData.name}
                                     onChange={handleChange}
                                     required
-                                    placeholder="John Doe"
                                 />
                             </div>
                             <div>
@@ -66,7 +79,6 @@ const AddEmployee = () => {
                                     value={formData.email}
                                     onChange={handleChange}
                                     required
-                                    placeholder="john@example.com"
                                 />
                             </div>
                             <div>
@@ -78,20 +90,20 @@ const AddEmployee = () => {
                                     value={formData.mobile}
                                     onChange={handleChange}
                                     required
-                                    placeholder="+1 234 567 890"
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-secondary-700 mb-1">Designation</label>
+                                <label className="block text-sm font-medium text-secondary-700 mb-1">Department</label>
                                 <select
-                                    name="designation"
+                                    name="department"
                                     className="input-field"
-                                    value={formData.designation}
+                                    value={formData.department}
                                     onChange={handleChange}
                                 >
-                                    <option value="HR">HR</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Sales">Sales</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Business Administration">Business Administration</option>
                                 </select>
                             </div>
                         </div>
@@ -127,17 +139,15 @@ const AddEmployee = () => {
                             <div>
                                 <label className="block text-sm font-medium text-secondary-700 mb-2">Course</label>
                                 <div className="flex gap-4">
-                                    {['MCA', 'BCA', 'BSC'].map((course) => (
+                                    {['MCA', 'BCA', 'BSC', 'B.Tech'].map((course) => (
                                         <label key={course} className="inline-flex items-center">
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 name="course"
                                                 value={course}
                                                 checked={formData.course === course}
-                                                onChange={(e) =>
-                                                    setFormData({ ...formData, course: e.target.value })
-                                                }
-                                                className="form-checkbox h-4 w-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500"
+                                                onChange={handleChange}
+                                                className="form-radio h-4 w-4 text-primary-600 border-secondary-300 focus:ring-primary-500"
                                             />
                                             <span className="ml-2 text-secondary-700">{course}</span>
                                         </label>
@@ -154,15 +164,13 @@ const AddEmployee = () => {
                                 className="input-field"
                                 value={formData.image}
                                 onChange={handleChange}
-                                placeholder="https://example.com/image.jpg"
                             />
-                            <p className="mt-1 text-xs text-secondary-500">Provide a direct link to the image file.</p>
                         </div>
 
                         <div className="flex justify-end pt-4 border-t border-secondary-100">
                             <button
                                 type="button"
-                                onClick={() => navigate('/employees')}
+                                onClick={() => navigate('/students')}
                                 className="btn-secondary mr-3"
                             >
                                 Cancel
@@ -172,7 +180,7 @@ const AddEmployee = () => {
                                 disabled={isLoading}
                                 className="btn-primary"
                             >
-                                {isLoading ? 'Creating...' : 'Create Employee'}
+                                {isLoading ? 'Update Student' : 'Update Student'}
                             </button>
                         </div>
                     </form>
@@ -182,4 +190,4 @@ const AddEmployee = () => {
     );
 };
 
-export default AddEmployee;
+export default EditStudent;

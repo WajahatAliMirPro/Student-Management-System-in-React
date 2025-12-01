@@ -1,33 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import api from '../utils/api';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const EditEmployee = () => {
+const AddStudent = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         mobile: '',
-        designation: '',
-        gender: '',
-        course: '',
+        department: 'Computer Science',
+        gender: 'Male',
+        course: 'MCA',
         image: '',
     });
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
-    const { id } = useParams();
-
-    useEffect(() => {
-        const fetchEmployee = async () => {
-            try {
-                const { data } = await api.get(`/employees/${id}`);
-                setFormData(data);
-            } catch (error) {
-                console.error('Error fetching employee:', error);
-            }
-        };
-        fetchEmployee();
-    }, [id]);
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,11 +24,11 @@ const EditEmployee = () => {
         e.preventDefault();
         setIsLoading(true);
         try {
-            await api.put(`/employees/${id}`, formData);
-            navigate('/employees');
+            await api.post('/students', formData);
+            navigate('/students');
         } catch (error) {
-            console.error('Error updating employee:', error);
-            alert(error.response?.data?.message || 'Error updating employee');
+            console.error('Error adding student:', error);
+            alert(error.response?.data?.message || 'Error adding student');
         } finally {
             setIsLoading(false);
         }
@@ -53,8 +40,8 @@ const EditEmployee = () => {
             <div className="max-w-3xl mx-auto py-10 px-4 sm:px-6 lg:px-8 animate-fade-in">
                 <div className="card overflow-hidden">
                     <div className="px-6 py-4 bg-primary-50 border-b border-primary-100">
-                        <h2 className="text-xl font-bold text-primary-900">Edit Employee</h2>
-                        <p className="text-sm text-primary-600 mt-1">Update the details of the employee.</p>
+                        <h2 className="text-xl font-bold text-primary-900">Create New Student</h2>
+                        <p className="text-sm text-primary-600 mt-1">Fill in the details to add a new student to the system.</p>
                     </div>
                     <form onSubmit={handleSubmit} className="p-6 space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -95,16 +82,17 @@ const EditEmployee = () => {
                                 />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-secondary-700 mb-1">Designation</label>
+                                <label className="block text-sm font-medium text-secondary-700 mb-1">Department</label>
                                 <select
-                                    name="designation"
+                                    name="department"
                                     className="input-field"
-                                    value={formData.designation}
+                                    value={formData.department}
                                     onChange={handleChange}
                                 >
-                                    <option value="HR">HR</option>
-                                    <option value="Manager">Manager</option>
-                                    <option value="Sales">Sales</option>
+                                    <option value="Computer Science">Computer Science</option>
+                                    <option value="Electrical Engineering">Electrical Engineering</option>
+                                    <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                    <option value="Business Administration">Business Administration</option>
                                 </select>
                             </div>
                         </div>
@@ -140,17 +128,15 @@ const EditEmployee = () => {
                             <div>
                                 <label className="block text-sm font-medium text-secondary-700 mb-2">Course</label>
                                 <div className="flex gap-4">
-                                    {['MCA', 'BCA', 'BSC'].map((course) => (
+                                    {['MCA', 'BCA', 'BSC', 'B.Tech'].map((course) => (
                                         <label key={course} className="inline-flex items-center">
                                             <input
-                                                type="checkbox"
+                                                type="radio"
                                                 name="course"
                                                 value={course}
                                                 checked={formData.course === course}
-                                                onChange={(e) =>
-                                                    setFormData({ ...formData, course: e.target.value })
-                                                }
-                                                className="form-checkbox h-4 w-4 text-primary-600 border-secondary-300 rounded focus:ring-primary-500"
+                                                onChange={handleChange}
+                                                className="form-radio h-4 w-4 text-primary-600 border-secondary-300 focus:ring-primary-500"
                                             />
                                             <span className="ml-2 text-secondary-700">{course}</span>
                                         </label>
@@ -175,7 +161,7 @@ const EditEmployee = () => {
                         <div className="flex justify-end pt-4 border-t border-secondary-100">
                             <button
                                 type="button"
-                                onClick={() => navigate('/employees')}
+                                onClick={() => navigate('/students')}
                                 className="btn-secondary mr-3"
                             >
                                 Cancel
@@ -185,7 +171,7 @@ const EditEmployee = () => {
                                 disabled={isLoading}
                                 className="btn-primary"
                             >
-                                {isLoading ? 'Updating...' : 'Update Employee'}
+                                {isLoading ? 'Creating...' : 'Create Student'}
                             </button>
                         </div>
                     </form>
@@ -195,4 +181,4 @@ const EditEmployee = () => {
     );
 };
 
-export default EditEmployee;
+export default AddStudent;

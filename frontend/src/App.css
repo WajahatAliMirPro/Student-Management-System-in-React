@@ -1,62 +1,77 @@
 /* --------------------------------------------------
-   Global Enhancements – Clean & Modern
+   Global Futuristic Dark Theme
 -------------------------------------------------- */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    background: linear-gradient(135deg, #151926 55%, #1c3445 100%);
+    color: #e5fefb;
+    min-height: 100vh;
+    backdrop-filter: blur(7px);
 }
 
-/* --------------------------------------------------
-   Loading Screen
--------------------------------------------------- */
 .loading-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #4f8bfd, #6f7bff);
-    color: rgb(255, 3, 3);
-    font-size: 1.6rem;
-    font-weight: 600;
+    background: linear-gradient(135deg, #31c3c4 0%, #16203a 100%);
+    color: #e5fefb;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    animation: neonFadeIn 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards;
 }
 
-/* --------------------------------------------------
-   Smooth Hover + Transitions
--------------------------------------------------- */
 button,
 a,
 input,
 select,
 textarea {
-    transition: all 0.25s ease;
+    transition: all 0.32s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+button {
+    border-radius: 1.1em;
+    background: linear-gradient(90deg, #4461f2 40%, #31c3c4 100%);
+    color: #fff;
+    border: none;
+    box-shadow: 0 2px 24px 0 #31c3c455;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    position: relative;
+    overflow: hidden;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 6px 32px rgba(49, 195, 196, 0.29);
+    background: linear-gradient(90deg, #5379fb, #31c3c4 95%);
 }
 
 button:active {
-    transform: translateY(0);
+    transform: scale(0.98);
 }
 
-/* --------------------------------------------------
-   Table Styling
--------------------------------------------------- */
 table {
     width: 100%;
     border-collapse: collapse;
+    color: #eaf7fe;
+    background: rgba(31, 48, 89, 0.86);
+    border-radius: 1em;
+    box-shadow: 0 2px 20px #31c3c422;
 }
 
 table th {
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
-    font-size: 0.85rem;
+    font-size: 0.93rem;
     letter-spacing: 0.04em;
-    color: #374151;
+    color: #31c3c4;
+    border-bottom: 1px solid #0196a9;
 }
 
 table tr:hover {
-    background-color: #f3f4f6;
+    background-color: #27375b;
 }
 
 .table-container {
@@ -64,65 +79,55 @@ table tr:hover {
     width: 100%;
 }
 
-/* --------------------------------------------------
-   Scrollbar Styling
--------------------------------------------------- */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #e5e7eb;
+    background: #181e25;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #9ca3af;
+    background: linear-gradient(135deg, #31c3c4 0%, #4461f2 100%);
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #6b7280;
+    background: #5bf6e8;
 }
 
-/* --------------------------------------------------
-   Form Focus
--------------------------------------------------- */
 input:focus,
 select:focus,
 textarea:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.35);
+    border-color: #31c3c4;
+    box-shadow: 0 0 0 3px #31c3c470;
 }
 
-/* --------------------------------------------------
-   Navbar Styling
--------------------------------------------------- */
 nav {
     width: 100%;
-    background: rgb(59, 60, 63);
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background: linear-gradient(90deg, #19203d 60%, #22243a 100%);
+    padding: 1rem 1.3rem;
+    border-bottom: 1px solid #31c3c466;
+    box-shadow: 0 2px 6px #31c3c433;
     position: sticky;
     top: 0;
     z-index: 40;
+    backdrop-filter: blur(4px);
 }
 
 nav .nav-holder {
-    max-width: 1280px;
+    max-width: 1360px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: #e5fefb;
 }
 
-/* --------------------------------------------------
-   Responsive Adjustments
--------------------------------------------------- */
 @media (max-width: 1024px) {
     .card {
-        padding: 1rem !important;
+        padding: 1.3rem !important;
     }
 }
 
@@ -130,7 +135,7 @@ nav .nav-holder {
     nav .nav-holder {
         flex-direction: column;
         text-align: center;
-        gap: 0.75rem;
+        gap: 1rem;
     }
 
     button {
@@ -140,11 +145,29 @@ nav .nav-holder {
 
 @media (max-width: 480px) {
     button {
-        font-size: 0.9rem;
-        padding: 0.65rem 0.8rem;
+        font-size: 1rem;
+        padding: 0.85rem 1.1rem;
     }
 
     .card {
-        padding: 0.75rem !important;
+        padding: 1rem !important;
+    }
+}
+
+/* Extra Futuristic Animations */
+@keyframes neonFadeIn {
+    0% {
+        opacity: 0;
+        filter: blur(12px);
+    }
+
+    85% {
+        opacity: 1;
+        filter: blur(0.5px);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
     }
 }

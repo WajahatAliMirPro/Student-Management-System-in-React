@@ -11,22 +11,22 @@ const Dashboard = () => {
                     <div className="card mb-6">
                         <div className="flex items-center justify-between mb-6">
                             <h1 className="text-3xl font-bold text-secondary-900">Dashboard</h1>
-                            <Link to="/add-employee" className="btn-primary">
-                                Add New Employee
+                            <Link to="/add-student" className="btn-primary">
+                                Add New Student
                             </Link>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             <div className="bg-primary-50 p-6 rounded-xl border border-primary-100 transition-transform hover:-translate-y-1 duration-300">
                                 <h3 className="text-lg font-semibold text-primary-800">Welcome Back!</h3>
-                                <p className="text-primary-600 mt-2">Manage your employees efficiently from this admin panel.</p>
+                                <p className="text-primary-600 mt-2">Manage your students efficiently from this admin panel.</p>
                             </div>
                             <div className="card hover:shadow-md border-secondary-200">
                                 <h3 className="text-lg font-semibold text-secondary-800">Quick Actions</h3>
                                 <div className="mt-4 flex flex-col space-y-2">
-                                    <Link to="/employees" className="text-primary-600 hover:text-primary-800 font-medium transition-colors">
-                                        View All Employees &rarr;
+                                    <Link to="/students" className="text-primary-600 hover:text-primary-800 font-medium transition-colors">
+                                        View All Students &rarr;
                                     </Link>
-                                    <Link to="/add-employee" className="text-primary-600 hover:text-primary-800 font-medium transition-colors">
+                                    <Link to="/add-student" className="text-primary-600 hover:text-primary-800 font-medium transition-colors">
                                         Create New Profile &rarr;
                                     </Link>
                                 </div>
